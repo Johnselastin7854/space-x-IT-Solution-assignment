@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import Products from "~/components/Products";
 import { Button } from "~/components/ui/button";
 
 export default function HomePage() {
@@ -24,7 +25,8 @@ export default function HomePage() {
     }
   };
   return (
-    <main className="flex min-h-screen w-full items-center justify-center">
+    <main className="flex min-h-screen w-full flex-col items-center justify-center gap-3">
+      <Products />
       <Button
         disabled={loading ? true : false}
         type="submit"
