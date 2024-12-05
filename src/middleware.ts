@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const publicRoute = ["/sign-in", "/sign-up", "/verify-email"];
-  const token = request.cookies.get("token")?.value || "";
+  const token = request.cookies.get("token")?.value ?? "";
 
   if (publicRoute.includes(path) && token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));

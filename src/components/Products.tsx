@@ -2,8 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Checkbox } from "./ui/checkbox";
-import { AlignLeft, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { z } from "zod";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 
 interface Category {
@@ -32,7 +31,7 @@ const Products = () => {
         setLoader(false);
       }
     };
-    getCategory();
+    void getCategory();
   }, [page]);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ const Products = () => {
         console.error("Error fetching selected categories:", error);
       }
     };
-    getSelectedCategories();
+    void getSelectedCategories();
   }, []);
 
   const handleCheckboxChange = (categoryId: string) => {
@@ -59,7 +58,7 @@ const Products = () => {
 
   const handleSaveCategories = async () => {
     try {
-      const response = await axios
+      await axios
         .post("/api/user/user-selected-category", {
           selectedCategories,
         })
@@ -77,7 +76,6 @@ const Products = () => {
     );
   }
 
-  console.log(selectedCategories, "hello");
   return (
     <div className="rounded-md border border-gray-300 p-10">
       <h1 className="text-center text-lg font-semibold">
@@ -92,7 +90,7 @@ const Products = () => {
 
         <div>
           {categories.map((category: any) => (
-            <div className="mb-2 mt-2 flex gap-2 space-x-2">
+            <div className="mb-2 mt-2 flex gap-2 space-x-2" key={category.id}>
               <Checkbox
                 id={`${category.id}`}
                 checked={selectedCategories.includes(category?.id)}

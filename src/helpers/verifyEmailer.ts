@@ -18,7 +18,7 @@ export const verifyEmail = async (email: string) => {
       },
     });
 
-    var transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: env.NODE_MAILER_EMAIL,

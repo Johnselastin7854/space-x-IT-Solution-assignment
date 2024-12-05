@@ -4,10 +4,10 @@ import { db } from "~/server/db";
 
 export async function POST(request: NextRequest) {
   try {
-    const userData: any = await getTokenData(request);
+    const userData: any = getTokenData(request);
     const { selectedCategories } = await request.json();
     console.log(selectedCategories, "api");
-    const userCategories = selectedCategories.map((category: any) => ({
+    const userCategories = selectedCategories.map((category) => ({
       userId: userData?.id,
       categoryId: category,
     }));

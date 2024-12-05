@@ -10,6 +10,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "~/components/ui/input-otp";
+import { Suspense } from "react";
 
 const VerfiyEmail = () => {
   const router = useRouter();
@@ -78,4 +79,10 @@ const VerfiyEmail = () => {
   );
 };
 
-export default VerfiyEmail;
+export function VerfiyEmailPage() {
+  return (
+    <Suspense>
+      <VerfiyEmail />
+    </Suspense>
+  );
+}

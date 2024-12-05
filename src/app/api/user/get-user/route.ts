@@ -4,7 +4,7 @@ import { db } from "~/server/db";
 
 export async function GET(request: NextRequest) {
   try {
-    const userData: any = await getTokenData(request);
+    const userData: any = getTokenData(request);
     const user = await db.user.findUnique({
       where: {
         id: userData?.id,

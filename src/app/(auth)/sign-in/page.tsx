@@ -48,12 +48,14 @@ const SignIn = () => {
     if (Object.values(newError).some((err) => err)) return;
     try {
       setLoading(true);
-      const user = await axios.post("/api/auth/sign-in", userData);
+      await axios.post("/api/auth/sign-in", userData);
       setUserData({ email: "", password: "" });
       toast.success("Logged in  successful!");
       router.push("/");
-    } catch (error) {
-      toast.error("Sign in failed");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error("Sign in failed");
+      }
     } finally {
       setLoading(false);
     }

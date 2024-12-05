@@ -54,8 +54,10 @@ const SignUp = () => {
       router.push(`/verify-email?email=${userData?.email}`);
       toast.success("Sign up successful!");
       setUserData({ username: "", email: "", password: "" });
-    } catch (error) {
-      toast.error("Sign up failed");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error("Signed up failed");
+      }
     } finally {
       setLoading(false);
     }

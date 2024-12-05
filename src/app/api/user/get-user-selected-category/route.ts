@@ -4,7 +4,7 @@ import { db } from "~/server/db";
 
 export async function GET(request: NextRequest) {
   try {
-    const userData: any = await getTokenData(request);
+    const userData: any = getTokenData(request);
 
     const userCategories = await db.userCategory.findMany({
       where: { userId: userData?.id },
