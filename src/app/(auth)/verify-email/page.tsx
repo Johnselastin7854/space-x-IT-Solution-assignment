@@ -79,7 +79,7 @@ const VerfiyEmail = () => {
   );
 };
 
-export function VerfiyEmailPage() {
+export default function VerfiyEmailPage() {
   return (
     <Suspense>
       <VerfiyEmail />
