@@ -28,6 +28,7 @@ const SignUp = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +50,8 @@ const SignUp = () => {
     if (Object.values(newError).some((err) => err)) return;
     try {
       setLoading(true);
-      const user = await axios.post("/api/auth/sign-up", userData);
-      router.push("/sign-in");
+      await axios.post("/api/auth/sign-up", userData);
+      router.push(`/verify-email?email=${userData?.email}`);
       toast.success("Sign up successful!");
       setUserData({ username: "", email: "", password: "" });
     } catch (error) {
@@ -58,6 +59,9 @@ const SignUp = () => {
     } finally {
       setLoading(false);
     }
+  };
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -99,16 +103,23 @@ const SignUp = () => {
                   <p className="text-sm text-red-500">{error.email}</p>
                 )}
               </div>
-              <div className="flex flex-col space-y-1.5">
+              <div className="relative flex flex-col space-y-1.5">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={userData.password}
                   placeholder="Enter Password"
                   onChange={(e) => handleInputChange(e)}
                 />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-2 top-1/2 mt-3 -translate-y-1/2 transform text-xs text-black underline"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
                 {error.password && (
                   <p className="text-sm text-red-500">{error.password}</p>
                 )}

@@ -9,6 +9,10 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     TOKEN_SECRET: z.string(),
+    NODE_MAILER_EMAIL: z.string(),
+    NODE_MAILER_PASS: z.string(),
+
+    // M: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -31,6 +35,15 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     TOKEN_SECRET: process.env.TOKEN_SECRET,
+    NODE_MAILER_PASS: process.env.NODE_MAILER_PASS,
+    NODE_MAILER_EMAIL: process.env.NODE_MAILER_EMAIL,
+
+    // MAILTRAP_PORT: z.string(),
+    // MAILTRAP_PORT: process.env.MAILTRAP_PORT
+    // M: process.env.M,
+    // NODE_ENV: process.env.NODE_ENV,
+    // TOKEN_SECRET: process.env.TOKEN_SECRET,
+    // MAILTRAP_USER: process.env.MAILTRAP_USER,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

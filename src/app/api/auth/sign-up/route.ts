@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { db } from "~/server/db";
 import bcrypt from "bcrypt";
+import { verifyEmail } from "~/helpers/verifyEmailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -44,6 +45,8 @@ export async function POST(request: NextRequest) {
         password: hashedPassword,
       },
     });
+
+    await verifyEmail(email);
 
     return NextResponse.json(
       {

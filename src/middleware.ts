@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-// This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  const publicRoute = ["/sign-in", "/sign-up"];
+  const publicRoute = ["/sign-in", "/sign-up", "/verify-email"];
   const token = request.cookies.get("token")?.value || "";
 
   if (publicRoute.includes(path) && token) {
@@ -18,5 +17,5 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/", "/sign-in", "/sign-up"],
+  matcher: ["/", "/sign-in", "/sign-up", "/verify-email"],
 };
