@@ -49,7 +49,7 @@ const SignUp = () => {
     if (Object.values(newError).some((err) => err)) return;
     try {
       setLoading(true);
-      const user = await axios.post("/api/user/sign-up", userData);
+      const user = await axios.post("/api/auth/sign-up", userData);
       router.push("/sign-in");
       toast.success("Sign up successful!");
       setUserData({ username: "", email: "", password: "" });

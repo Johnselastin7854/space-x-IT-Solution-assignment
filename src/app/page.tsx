@@ -12,7 +12,7 @@ export default function HomePage() {
   const onLogout = async () => {
     try {
       setLoading(true);
-      await axios.get("/api/user/log-out");
+      await axios.get("/api/auth/log-out");
       toast.success("Logged out successfully");
       router.push("/sign-in");
     } catch (error) {
