@@ -15,8 +15,10 @@ import { Label } from "~/components/ui/label";
 import { toast } from "sonner";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
+  const router = useRouter();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -45,9 +47,10 @@ const SignIn = () => {
     if (Object.values(newError).some((err) => err)) return;
     try {
       setLoading(true);
-      const user = await axios.post("/api/user/sign-up", userData);
-      toast.success("Sign in successful!");
+      const user = await axios.post("/api/user/sign-in", userData);
       setUserData({ email: "", password: "" });
+      toast.success("Logged in  successful!");
+      router.push("/");
     } catch (error) {
       toast.error("Sign in failed");
     } finally {
